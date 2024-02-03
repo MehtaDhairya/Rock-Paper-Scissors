@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        
+        
+        
+        function getComputerChoice(){
+          let choices = ["rock", "paper", "scissors"];
+
+          let index = Math.floor(Math.random() * 3);
+          return choices[index];
+        }
+        function play(playerSelection , computerSelection){
+
+            playerSelection = playerSelection.toLowerCase();
+
+            if(playerSelection == "rock" && computerSelection == "scissors")
+            {
+                  return "Rock Beats scissors! you win this round";
+            }
+            else if(playerSelection == "scissors" && computerSelection == "scissors"){
+                 return "It's a tie!";
+            }
+            else if(playerSelection == "paper" && computerSelection == "scissors"){
+                 return "Scissor Beats paper! you lose this round!";
+            }
+            else if(playerSelection == "rock" && computerSelection == "rock")
+            {
+                  return "It's a tie!";
+            }
+            else if(playerSelection == "scissors" && computerSelection == "rock"){
+                 return "Rock Beats scissors! you lose this round!";
+            }
+            else if(playerSelection == "paper" && computerSelection == "rock"){
+                 return "Paper Beats rock! you win this round!";
+            }
+            else if(playerSelection == "rock"&& computerSelection == "paper")
+            {
+                  return "Paper Beats rock! you lose this round!";
+            }
+            else if(playerSelection == "scissors" && computerSelection == "paper"){
+                 return "Scissors Beats Paper! you win this round!";
+            }
+            else if(playerSelection == "paper" && computerSelection == "paper"){
+                 return "It's a tie";
+            }
+            else if(playerSelection !="rock" && playerSelection !="paper" && playerSelection !="scissors"){
+                return "Please enter valid choice";
+            }
+        }
+        
+      function playGame(){
+
+        for(let i = 0; i <6;i++){
+    
+         let userChoice = prompt("Enter your choice?(rock, paper or scissors)");
+         let compChoice = getComputerChoice();
+         console.log(play(userChoice, compChoice));
+         console.log("This is the " + (i + 1) + "th round.");
+        }
+        }
+        
+    console.log("Enter 'playGame()' to play rock-paper-scissors");
+    </script>
+</head>
+<body>
+    <h1>Open devtools and select the console option in your devtools to play the rock-paper-scissors</h1>
+</body>
+</html>
