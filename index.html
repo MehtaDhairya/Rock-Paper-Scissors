@@ -4,70 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    
+   <p>Userscore: <span id="scorePlayer"></span> ComputerScore: <span id="scoreComp"></span></p>
+    <div id="result"></div>
+    <button id ="rock">Rock</button>
+    <button id = "paper">Paper</button>
+    <button id="scissors">Scissors</button>
     <script>
-        
-        
-        
+     //    let rock = document.querySelector("#rock")
+     //    let paper = document.querySelector("#paper")
+     //    let scissors = document.querySelector("#scissors")
+        let result = document.querySelector("#result");
+        let btns = document.querySelectorAll("button");
+        let userScore=0;
+          let compScore = 0;
+          let scorePlayer=document.querySelector("#scorePlayer");
+          let scoreComp = document.querySelector("#scoreComp");
         function getComputerChoice(){
           let choices = ["rock", "paper", "scissors"];
 
           let index = Math.floor(Math.random() * 3);
           return choices[index];
         }
-        function play(playerSelection , computerSelection){
+        function play(playerSelection, computerSelection) {
+    playerSelection = playerSelection.toLowerCase();
 
-            playerSelection = playerSelection.toLowerCase();
-
-            if(playerSelection == "rock" && computerSelection == "scissors")
-            {
-                  return "Rock Beats scissors! you win this round";
-            }
-            else if(playerSelection == "scissors" && computerSelection == "scissors"){
-                 return "It's a tie!";
-            }
-            else if(playerSelection == "paper" && computerSelection == "scissors"){
-                 return "Scissor Beats paper! you lose this round!";
-            }
-            else if(playerSelection == "rock" && computerSelection == "rock")
-            {
-                  return "It's a tie!";
-            }
-            else if(playerSelection == "scissors" && computerSelection == "rock"){
-                 return "Rock Beats scissors! you lose this round!";
-            }
-            else if(playerSelection == "paper" && computerSelection == "rock"){
-                 return "Paper Beats rock! you win this round!";
-            }
-            else if(playerSelection == "rock"&& computerSelection == "paper")
-            {
-                  return "Paper Beats rock! you lose this round!";
-            }
-            else if(playerSelection == "scissors" && computerSelection == "paper"){
-                 return "Scissors Beats Paper! you win this round!";
-            }
-            else if(playerSelection == "paper" && computerSelection == "paper"){
-                 return "It's a tie";
-            }
-            else if(playerSelection !="rock" && playerSelection !="paper" && playerSelection !="scissors"){
-                return "Please enter valid choice";
-            }
-        }
+    if (playerSelection == "rock" && computerSelection == "scissors") {
+     stopGame();
+        userScore++;
         
-      function playGame(){
+        return "Rock Beats scissors! you win this round";
+    } else if (playerSelection == "scissors" && computerSelection == "scissors") {
+     stopGame();
+        return "It's a tie!";
+    } else if (playerSelection == "paper" && computerSelection == "scissors") {
+     stopGame();
+        compScore++;
 
-        for(let i = 0; i <6;i++){
-    
-         let userChoice = prompt("Enter your choice?(rock, paper or scissors)");
-         let compChoice = getComputerChoice();
-         console.log(play(userChoice, compChoice));
-         console.log("This is the " + (i + 1) + "th round.");
+        return "Scissor Beats paper! you lose this round!";
+    } else if (playerSelection == "rock" && computerSelection == "rock") {
+     stopGame();
+        return "It's a tie!";
+    } else if (playerSelection == "scissors" && computerSelection == "rock") {
+     stopGame();
+        compScore++;
+        return "Rock Beats scissors! you lose this round!";
+    } else if (playerSelection == "paper" && computerSelection == "rock") {
+     stopGame();
+        userScore++;
+        return "Paper Beats rock! you win this round!";
+    } else if (playerSelection == "rock" && computerSelection == "paper") {
+     stopGame();
+        compScore++;
+        return "Paper Beats rock! you lose this round!";
+    } else if (playerSelection == "scissors" && computerSelection == "paper") {
+     stopGame();
+        userScore++;
+        return "Scissors Beats Paper! you win this round!";
+    } else if (playerSelection == "paper" && computerSelection == "paper") {
+     stopGame();
+        return "It's a tie";
+    } else if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors") {
+     stopGame();   
+     return "Please enter a valid choice";
+    }
+}
+        btns.forEach(function(btn) {
+            btn.addEventListener("click", function playGame() {
+                let userchoice = btn.id;
+                let compChoice = getComputerChoice();
+                result.textContent = play(userchoice, compChoice);
+                updateScore();
+                
+            });
+        });
+        function stopGame(){
+          if (compScore == 5)
+          {
+               
+               result.textContent = "The game has ended computer wins";
+              btns.preventDefault();
+
+          }
+          else if (userScore == 5)
+          {
+               result.textContent = "The game has ended user wins";
+               btns.preventDefault();
+          }
         }
+        function updateScore(){
+           scoreComp.textContent = compScore;
+           scorePlayer.textContent = userScore;
         }
-        
     console.log("Enter 'playGame()' to play rock-paper-scissors");
     </script>
-</head>
-<body>
-    <h1>Open devtools and select the console option in your devtools to play the rock-paper-scissors</h1>
 </body>
 </html>
